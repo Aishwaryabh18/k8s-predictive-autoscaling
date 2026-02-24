@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sketchpad-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sketchpad-app
+  template:
+    metadata:
+      labels:
+        app: sketchpad-app
+    spec:
+      containers:
+        - name: sketchpad-app
+          image: aishwaryaabh9/sketchpad-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
