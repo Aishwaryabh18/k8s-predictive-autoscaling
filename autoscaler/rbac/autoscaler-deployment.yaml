@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-autoscaler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-autoscaler
+  template:
+    metadata:
+      labels:
+        app: ml-autoscaler
+    spec:
+      containers:
+        - name: ml-autoscaler
+          image: aishwaryaabh9/ml-autoscaler:latest
