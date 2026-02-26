@@ -1,13 +1,12 @@
-import numpy as np
+import torch
+import torch.nn as nn
 
-def preprocess(metrics):
-    cpu = metrics["cpu"]
-    rps = metrics["rps"]
-    latency = metrics["latency"]
+class LSTMModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.lstm = nn.LSTM(3, 32, batch_first=True)
+        self.fc = nn.Linear(32, 1)
 
-    # simple normalization
-    cpu_n = cpu
-    rps_n = rps / 200
-    latency_n = latency / 2
-
-    return np.array([cpu_n, rps_n, latency_n])
+    def forward(self, x):
+        out, _ = self.lstm(x)
+        return self.fc(out[:, -1, :])
